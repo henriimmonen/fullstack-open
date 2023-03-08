@@ -1,9 +1,10 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRpbXBwYTEyMyIsImlkIjoiNjNkNTdkYmZmODFlODAzNjE4ZDQyY2EzIiwiaWF0IjoxNjc3ODA0MDI0fQ.TRxcHBmgQLPct8QmmB0HCxtwSBj3FJqP8G5dDEOmsWQ
 
 {
-    "title":"Some title",
-    "author": "Pekka Pouta",
-    "url": "http://jotain.com",
-    "likes":"1"
+    "title":"Middleware token",
+    "author": "H. Immonen",
+    "url": "helsinki.fi",
+    "likes":"5"
 }
