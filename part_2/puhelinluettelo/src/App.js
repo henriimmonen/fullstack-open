@@ -36,6 +36,7 @@ const App = () => {
   const addPerson = (event) => {
       event.preventDefault()
       const foundPerson = persons.filter(person => person.name === newName)
+      console.log(foundPerson)
       if (foundPerson.length > 0) {
         if (window.confirm(`${newName} is already in phonebook. Replace old number with new one?`)){
           const personObject = {
@@ -56,7 +57,7 @@ const App = () => {
             })
             .catch(error => {
               setType("warning")
-              setMessage("the person " + foundPerson[0].name + " was already deleted from server")
+              setMessage("the person " + foundPerson[0].name + " could not be updated due to error")
                 setTimeout(() => {
                   setMessage(null)
                 }, 5000)
@@ -76,12 +77,20 @@ const App = () => {
             setPersons(persons.concat(returnedPerson))
             setNewName('')
             setNewNumber('')
+            setType("success")
+            setMessage(name + " added.")
+            setTimeout(() => {
+              setMessage(null)
+            }, 5000)
           })
-        setType("success")
-        setMessage(name + " added.")
-        setTimeout(() => {
-          setMessage(null)
-        }, 5000)
+          .catch(error => {
+            setType("warning")
+            setMessage('Something wrong with given name or number')
+            setTimeout(() => {
+              setMessage(null)
+            }, 5000)
+            console.log(error.response.data)
+          })
       }
   }
 
@@ -120,7 +129,7 @@ const App = () => {
       if (newFilter === ''){
         setFpersons([])
       } else {
-        let filtered = persons.filter(person => person.name.includes(newFilter))
+        let filtered = persons.filter(person => person.name.toLowerCase().includes(newFilter.toLowerCase()))
         setFpersons(filtered)
       }
   }
